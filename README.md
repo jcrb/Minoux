@@ -39,3 +39,88 @@ Points particuliers
 - mortalité: je ne sais pas. Peut être à partir des données de l'INSEE. A explorer.
 - secours à personne:je pense qu'on peut obtenir l'info du SAMU mais il serait peut être utile de la croiser avec des données du SDIS (via LT ?)
 - SMUR et Dragon: ça ne devrait pas poser de pb.
+
+Sources de données
+==================
+
+Acccidents
+----------
+
+date extration de la base: 14/02/2014
+source: http://www.data.gouv.fr/fr/dataset/base-de-donnees-accidents-corporels-de-la-circulation-sur-6-annees
+
+Cette base est extraite du fichier national des accidents corporels de la circulation, dit « Fichier BAAC1 », administré par l’Observatoire interministériel de la sécurité routière. Pour chaque accident corporel (soit un accident survenu sur une voie ouverte à la circulation publique, impliquant au moins un véhicule et ayant fait au moins une victime ayant nécessité des soins), les saisies d’information sont effectuées par l’unité des forces de l’ordre (police, gendarmerie, etc.) qui est intervenue sur le lieu de l’accident. La base répertorie l'intégralité des accidents corporels de la circulation intervenus de 2006 à 2011 en France (4 DOM inclus, à savoir Guadeloupe, Guyane, Martinique et La Réunion), avec leur description simplifiée (plus un indice de gravité – défini plus loin). Cela inclue toutes les informations de localisation disponibles dans le Fichier BAAC, telles qu’elles y sont renseignées ainsi que les informations concernant les véhicules et leurs victimes.
+
+Cette base comporte 454 372 accidents (440 695 pour la métropole et 13 677 pour les DOM) et 775 422 véhicules présents dans les accidents (751 831 pour la métropole et 23 591 pour les DOM).
+
+Elle est notablement plus détaillée que la base de données 2005-2010 postée précédemment sur Etalab (à l’automne 2011). 
+
+17/02/2014
+==========
+- vallée de la bruche in [wikipédia](http://fr.wikipedia.org/wiki/Communaut%C3%A9_de_communes_de_la_Vall%C3%A9e_de_la_Bruche). Tableau avec la liste des communes à récupérer
+- projet VL médicalisée (JCB) dans un mail pour Schiber -> copie JMM
+- liste des communes du Smur de Sélestat
+- secteur d'Obernai: pas de définition officielle. Listes des communes établies par JMM:
+Altorf
+Avolsheim
+Bernardswiller
+Bischoffsheim
+Boersch
+Dangolsheim
+Dinsheim
+Dorlisheim
+Duttlenheim
+Flexbourg
+Goxwiller
+Gresswiller
+Griesheim-près-Molsheim
+Heiligenberg
+Heiligenstein
+Hernolsheim
+Innenheim
+Klingenthal
+Krautergersheim
+Laubenheim
+Meistratzheim
+Mollkirch
+Molsheim
+Mutzig
+Niedernai
+Obernai
+Ottrott
+Rosenwiller
+Rosheim
+Saint-Nabor
+Valff
+
+corrections:
+- Boersch -< Bœrsch
+- Dinsheim -> Dinsheim-sur-Bruche
+- Hernolsheim -> Ernolsheim-Bruche
+- Klingenthal -> Bœrsch
+- Laubenheim -> Mollkirch
+
+library("XML")
+library("knitr")
+
+cla <- readHTMLTable("http://fr.wikipedia.org/wiki/Liste_des_communes_du_Bas-Rhin", stringsAsFactors = FALSE)
+br <- cla[[1]]
+cc <- c("Altorf","Avolsheim","Bernardswiller","Bischoffsheim","Bœrsch","Dangolsheim","Dinsheim-sur-Bruche","Dorlisheim","Duttlenheim","Flexbourg","Goxwiller","Gresswiller","Griesheim-près-Molsheim","Heiligenberg","Heiligenstein","Ernolsheim-Bruche","Innenheim","Krautergersheim","Meistratzheim","Mollkirch","Molsheim","Mutzig","Niedernai","Obernai","Ottrott","Rosenwiller","Rosheim","Saint-Nabor","Valff")
+
+cc <- as.data.frame(cc)
+
+a <- merge(cc,br, all.x = TRUE, by.x = 1, by.y = 3)
+so <- a
+write.table(so, file = "secteur_Obernai.csv", sep=",")
+# a <- toupper(cc[,1])
+
+- faire la liste des communautés de communes du secteur
+
+Voici donc quelques précisions :
+
+- Peux-tu m’adresser le listing des commune du « territoire de proximité de Sélestat » pour m’assurer qu’il corresponde au secteur du SMUR ou le cas échéant le compléter  
+- Secteur d’Obernai : ci-joint une liste un peu arbitraire ; dis-moi ce que tu en penses si tu le mets sur une carte
+- Secteur Vallée de la Bruche : je n’ai pas connaissance de définition officielle, je prendrai donc le listing « bartier »
+- ehpad : le nombre de lits sera suffisant, inutile d’aller dans plus de détails
+- Accidentologie et mortalité : critères secondaires
+
