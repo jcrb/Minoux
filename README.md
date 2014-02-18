@@ -124,3 +124,6 @@ Voici donc quelques précisions :
 - ehpad : le nombre de lits sera suffisant, inutile d’aller dans plus de détails
 - Accidentologie et mortalité : critères secondaires
 
+
+
+
