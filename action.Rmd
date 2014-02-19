@@ -33,6 +33,7 @@ Variables:
 
 ```{r zo}
 library("maptools")
+source("../copyright.R")
 load("../RPU_2013/doc/cartographie/carto_alsace.rda")
 
 zpo <- read.table("secteur_Obernai.csv", header=T, sep=",")
@@ -53,6 +54,7 @@ y <- obernai$Y_CHF_LIEU * 100
 nom <- obernai$NOM_COMM
 points(x,y, pch=19, col="red")
 text(x,y, labels = nom, pos=3, cex=0.8)
+copyright()
 
 # Affichage du nom de toutes les communes
 plot(zp1)
@@ -61,6 +63,7 @@ y <- a$Y_CHF_LIEU * 100
 points(x,y, pch=19, col="red")
 nom <- a$NOM_COMM
 text(x,y, labels = nom, pos=3, cex=0.6)
+copyright()
 
 # formation d'une région par fusion des polygones
 contour <- unionSpatialPolygons(zp1, IDs = zp1@data$NOM_DEPT)
@@ -70,6 +73,7 @@ y <- a$Y_CHF_LIEU * 100
 points(x,y, pch=19, col="red")
 nom <- a$NOM_COMM
 text(x,y, labels = nom, pos=3, cex=0.6)
+copyright()
 ```
 
 

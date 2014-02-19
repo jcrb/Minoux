@@ -6,8 +6,9 @@ Projet Smur paramedicalisé dans la région de S. pour faire du TIIH + assistanc
 Todo
 ----
 - liste des Ehpad du secteur + places
-- liste des commmunes concernées
-- cartographie
+- mettre à jour les populations
+- liste des commmunes concernées: ok
+- cartographie: ok
 
 13/02/2014
 ----------

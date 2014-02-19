@@ -47,6 +47,7 @@ library("maptools")
 ```
 
 ```r
+source("../copyright.R")
 load("../RPU_2013/doc/cartographie/carto_alsace.rda")
 
 zpo <- read.table("secteur_Obernai.csv", header = T, sep = ",")
@@ -77,6 +78,7 @@ y <- obernai$Y_CHF_LIEU * 100
 nom <- obernai$NOM_COMM
 points(x, y, pch = 19, col = "red")
 text(x, y, labels = nom, pos = 3, cex = 0.8)
+copyright()
 ```
 
 ![plot of chunk zo](figure/zo1.png) 
@@ -90,6 +92,7 @@ y <- a$Y_CHF_LIEU * 100
 points(x, y, pch = 19, col = "red")
 nom <- a$NOM_COMM
 text(x, y, labels = nom, pos = 3, cex = 0.6)
+copyright()
 ```
 
 ![plot of chunk zo](figure/zo2.png) 
@@ -114,6 +117,7 @@ y <- a$Y_CHF_LIEU * 100
 points(x, y, pch = 19, col = "red")
 nom <- a$NOM_COMM
 text(x, y, labels = nom, pos = 3, cex = 0.6)
+copyright()
 ```
 
 ![plot of chunk zo](figure/zo3.png) 
