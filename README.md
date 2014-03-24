@@ -95,7 +95,7 @@ Saint-Nabor
 Valff
 
 corrections:
-- Boersch -< Bœrsch
+- Boersch -> Bœrsch
 - Dinsheim -> Dinsheim-sur-Bruche
 - Hernolsheim -> Ernolsheim-Bruche
 - Klingenthal -> Bœrsch
@@ -124,6 +124,23 @@ Voici donc quelques précisions :
 - Secteur Vallée de la Bruche : je n’ai pas connaissance de définition officielle, je prendrai donc le listing « bartier »
 - ehpad : le nombre de lits sera suffisant, inutile d’aller dans plus de détails
 - Accidentologie et mortalité : critères secondaires
+
+Population du secteur d'Obernai
+-------------------------------
+On utilise le fichier pop67.Rda  
+On récupère la liste des communes du secteur Obernai (avec une modification pour Boersch), dont on fait un dataframe  
+
+
+load("~/Documents/Resural/Stat Resural/carto&pop/pop67.rda")  
+cc <- c("Altorf","Avolsheim","Bernardswiller","Bischoffsheim","Boersch","Dangolsheim","Dinsheim-sur-Bruche","Dorlisheim","Duttlenheim","Flexbourg","Goxwiller","Gresswiller","Griesheim-près-Molsheim","Heiligenberg","Heiligenstein","Ernolsheim-Bruche","Innenheim","Krautergersheim","Meistratzheim","Mollkirch","Molsheim","Mutzig","Niedernai","Obernai","Ottrott","Rosenwiller","Rosheim","Saint-Nabor","Valff")
+cc <- as.data.frame(cc)
+a <- merge(cc, pop67, all.x = TRUE, by.x = 1, by.y = 7)
+sum(a$Population.municipale)
+
+[1] 65561
+
+obernai <- a[, c(1,11,8)]
+write.table(obernai, file="Secteur.Obernai.csv", sep=",")
 
 
 
