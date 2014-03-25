@@ -10,6 +10,9 @@ Variables:
 - base: résultat de la lecture de carto_alsace.Rda: dataframe de 904 lignes correspondant auc communes d'Alsace et 31 colonnes correspondant aux caractéristiques de chaque commune
 
 ```{r zp_selestat}
+# Pour supprimer la notation scientifique:
+options(scipen = 6, digits = 2)
+
 load("../RPU_2013/doc/cartographie/RPU2013_Carto_Pop/base.Rda")
 zp_selestat <- base[base$zone_proximite=="7","ville_nom"]
 write.table(zp_selestat,file="zp_selestat.csv",sep=",")
@@ -76,24 +79,50 @@ text(x,y, labels = nom, pos=3, cex=0.6)
 copyright()
 ```
 
-Population du secteur d'Obernai
+Population du secteur d'Obernai (24/3/2014)
 -------------------------------
 
 On utilise le fichier pop67.Rda  
 On récupère la liste des communes du secteur Obernai (avec une modification pour Boersch), dont on fait un dataframe. On merge les 2 dataframe.
 
-```{rpop_obernai}
+```{rpop_obernai, echo=FALSE}
+
+getwd()
 load("~/Documents/Resural/Stat Resural/carto&pop/pop67.rda")
 
 cc <- c("Altorf","Avolsheim","Bernardswiller","Bischoffsheim","Boersch","Dangolsheim","Dinsheim-sur-Bruche","Dorlisheim","Duttlenheim","Flexbourg","Goxwiller","Gresswiller","Griesheim-près-Molsheim","Heiligenberg","Heiligenstein","Ernolsheim-Bruche","Innenheim","Krautergersheim","Meistratzheim","Mollkirch","Molsheim","Mutzig","Niedernai","Obernai","Ottrott","Rosenwiller","Rosheim","Saint-Nabor","Valff")
 cc <- as.data.frame(cc)
 a <- merge(cc, pop67, all.x = TRUE, by.x = 1, by.y = 7)
 
-sum(a$Population.municipale)
+tot <- sum(a$Population.municipale)
 
 obernai <- a[, c(1,11,8)]
-obernai
+
 write.table(obernai, file="Secteur.Obernai.csv", sep=",")
+```
+
+```{r kable, results='asis'}
+kable(obernai)
+```
+Population totale: `r tot`
+
+
+EHPAD du secteur (24/3/2014)
+----------------
+
+```{r ehpad, results='asis',echo=FALSE}
+
+load("~/Documents/Resural/Stat Resural/EHPAD/data/ehpad_alsace.Rda")
+cc <- c("Altorf","Avolsheim","Bernardswiller","Bischoffsheim","Boersch","Dangolsheim","Dinsheim-sur-Bruche","Dorlisheim","Duttlenheim","Flexbourg","Goxwiller","Gresswiller","Griesheim-près-Molsheim","Heiligenberg","Heiligenstein","Ernolsheim-Bruche","Innenheim","Krautergersheim","Meistratzheim","Mollkirch","Molsheim","Mutzig","Niedernai","Obernai","Ottrott","Rosenwiller","Rosheim","Saint-Nabor","Valff")
+cc<-toupper(cc)
+cc <- as.data.frame(cc)
+a <- merge(cc, d, all.x = TRUE, by.x = 1, by.y = 9)
+mr <- a[!is.na(a$Numero.FINESS), c(1,2,5,7,9,10,14,21,28,34,40,46,52,58)]
+x <- as.matrix(mr[,9:14])
+capacite.tot <- rowSums(x, na.rm=T)
+mrr <- cbind(mr, capacite.tot)
+mrr <- mrr[, c(-9:-14)]
+kable(mrr)
 ```
 
 

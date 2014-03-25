@@ -11,6 +11,9 @@ Variables:
 
 
 ```r
+# Pour supprimer la notation scientifique:
+options(scipen = 6, digits = 2)
+
 load("../RPU_2013/doc/cartographie/RPU2013_Carto_Pop/base.Rda")
 zp_selestat <- base[base$zone_proximite == "7", "ville_nom"]
 write.table(zp_selestat, file = "zp_selestat.csv", sep = ",")
@@ -123,74 +126,74 @@ copyright()
 ![plot of chunk zo](figure/zo3.png) 
 
 
-Population du secteur d'Obernai
+Population du secteur d'Obernai (24/3/2014)
 -------------------------------
 
 On utilise le fichier pop67.Rda  
 On récupère la liste des communes du secteur Obernai (avec une modification pour Boersch), dont on fait un dataframe. On merge les 2 dataframe.
 
 
-```r
-load("~/Documents/Resural/Stat Resural/carto&pop/pop67.rda")
-
-cc <- c("Altorf", "Avolsheim", "Bernardswiller", "Bischoffsheim", "Boersch", 
-    "Dangolsheim", "Dinsheim-sur-Bruche", "Dorlisheim", "Duttlenheim", "Flexbourg", 
-    "Goxwiller", "Gresswiller", "Griesheim-près-Molsheim", "Heiligenberg", 
-    "Heiligenstein", "Ernolsheim-Bruche", "Innenheim", "Krautergersheim", "Meistratzheim", 
-    "Mollkirch", "Molsheim", "Mutzig", "Niedernai", "Obernai", "Ottrott", "Rosenwiller", 
-    "Rosheim", "Saint-Nabor", "Valff")
-cc <- as.data.frame(cc)
-a <- merge(cc, pop67, all.x = TRUE, by.x = 1, by.y = 7)
-
-sum(a$Population.municipale)
+```
+## [1] "/home/jcb/Documents/Resural/Stat Resural/Minoux"
 ```
 
-```
-## [1] 65561
-```
+
 
 ```r
-
-obernai <- a[, c(1, 11, 8)]
-obernai
+kable(obernai)
 ```
 
-```
-##                         cc insee Population.municipale
-## 1                   Altorf 67008                  1273
-## 2                Avolsheim 67016                   728
-## 3           Bernardswiller 67031                  1422
-## 4            Bischoffsheim 67045                  3272
-## 5                  Boersch 67052                  2437
-## 6              Dangolsheim 67085                   664
-## 7      Dinsheim-sur-Bruche 67098                  1365
-## 8               Dorlisheim 67101                  2478
-## 9              Duttlenheim 67112                  2876
-## 10       Ernolsheim-Bruche 67128                  1660
-## 11               Flexbourg 67139                   479
-## 12               Goxwiller 67164                   822
-## 13             Gresswiller 67168                  1538
-## 14 Griesheim-près-Molsheim 67172                  2036
-## 15            Heiligenberg 67188                   654
-## 16           Heiligenstein 67189                   966
-## 17               Innenheim 67223                  1115
-## 18         Krautergersheim 67248                  1689
-## 19           Meistratzheim 67286                  1411
-## 20               Mollkirch 67299                   962
-## 21                Molsheim 67300                  9215
-## 22                  Mutzig 67313                  5664
-## 23               Niedernai 67329                  1232
-## 24                 Obernai 67348                 10731
-## 25                 Ottrott 67368                  1634
-## 26             Rosenwiller 67410                   674
-## 27                 Rosheim 67411                  4834
-## 28             Saint-Nabor 67428                   476
-## 29                   Valff 67504                  1254
-```
+|cc                       |insee  |  Population.municipale|
+|:------------------------|:------|----------------------:|
+|Altorf                   |67008  |                   1273|
+|Avolsheim                |67016  |                    728|
+|Bernardswiller           |67031  |                   1422|
+|Bischoffsheim            |67045  |                   3272|
+|Boersch                  |67052  |                   2437|
+|Dangolsheim              |67085  |                    664|
+|Dinsheim-sur-Bruche      |67098  |                   1365|
+|Dorlisheim               |67101  |                   2478|
+|Duttlenheim              |67112  |                   2876|
+|Ernolsheim-Bruche        |67128  |                   1660|
+|Flexbourg                |67139  |                    479|
+|Goxwiller                |67164  |                    822|
+|Gresswiller              |67168  |                   1538|
+|Griesheim-près-Molsheim  |67172  |                   2036|
+|Heiligenberg             |67188  |                    654|
+|Heiligenstein            |67189  |                    966|
+|Innenheim                |67223  |                   1115|
+|Krautergersheim          |67248  |                   1689|
+|Meistratzheim            |67286  |                   1411|
+|Mollkirch                |67299  |                    962|
+|Molsheim                 |67300  |                   9215|
+|Mutzig                   |67313  |                   5664|
+|Niedernai                |67329  |                   1232|
+|Obernai                  |67348  |                  10731|
+|Ottrott                  |67368  |                   1634|
+|Rosenwiller              |67410  |                    674|
+|Rosheim                  |67411  |                   4834|
+|Saint-Nabor              |67428  |                    476|
+|Valff                    |67504  |                   1254|
 
-```r
-write.table(obernai, file = "Secteur.Obernai.csv", sep = ",")
-```
+Population totale: 65561
+
+
+EHPAD du secteur (24/3/2014)
+----------------
+
+|id  |cc             |  Numero.FINESS|Raison.sociale                          |Adresse                      |  Code.postal|Tel              |Lib.categorie       |  FINESS.juridique|  capacite.tot|
+|:---|:--------------|--------------:|:---------------------------------------|:----------------------------|------------:|:----------------|:-------------------|-----------------:|-------------:|
+|4   |BISCHOFFSHEIM  |      670781046|MR RESIDENCE MARIE ROBERTA EHPAD        |4 RUE DE L'HOPITAL           |        67870|03 88 50 41 13   |Maison de Retraite  |         670000538|            44|
+|8   |DORLISHEIM     |      670783216|MR SAREPTA DORLISHEIM - EHPAD           |4 RUE LUTHER                 |        67120|03 88 47 94 30   |Maison de Retraite  |         670000827|           137|
+|21  |MOLSHEIM       |      670793736|MR HOPITAL LOCAL DE MOLSHEIM - EHPAD    |5 COUR DES CHARTREUX         |        67120|03 88 49 70 70   |Maison de Retraite  |         670780642|           164|
+|22  |MOLSHEIM       |      670790930|RESIDENCE BON REPOS A MOLSHEIM          |1 RUE DES ETANGS             |        67120|03 88 38 51 31   |Logement Foyer      |         670792530|            62|
+|23  |MOLSHEIM       |      670797703|RES LES PEUPLIERS A MOLSHEIM            |2 RUE DES ETANGS             |        67120|03 88 38 51 31   |Logement Foyer      |         670792530|            24|
+|24  |MUTZIG         |      670793785|MR DE MUTZIG EHPAD                      |7 RUE DE L'HOPITAL           |        67190|03 88 38 13 76   |Maison de Retraite  |         670780659|           100|
+|25  |MUTZIG         |      670790955|RESIDENCE BON SEJOUR A MUTZIG           |9 RUE DOCTEUR SCHWEITZER     |        67190|03 88 38 51 31   |Logement Foyer      |         670792530|            46|
+|27  |OBERNAI        |      670790948|RESIDENCE HOHENBOURG A OBERNAI          |RUE DU FOYER                 |        67210|03 88 95 56 76   |Logement Foyer      |         670792548|            68|
+|30  |ROSHEIM        |      670793751|MR DE L'HOPITAL LOCAL DE ROSHEIM EHPAD  |14 RUE DU GENERAL DE GAULLE  |        67560|03 88 50 40 50   |Maison de Retraite  |         670780675|            90|
+|31  |ROSHEIM        |      670798974|MR DU COUVENT DE ROSHEIM                |3 RUE SAINT BENOIT           |        67560|03 88 50 41 67   |Maison de Retraite  |         670798966|             9|
+|33  |VALFF          |      670009349|UNITE DE VIE PA LES CHEVREFEUILLES      |186 RUE PRINCIPALE           |        67210|03 88 08 75 93   |Maison de Retraite  |         670009299|            15|
 
 
 
