@@ -109,7 +109,9 @@ Population totale: `r tot`
 
 EHPAD du secteur (24/3/2014)
 ----------------
-
+ On utilise le fichiers des EHPAD créé pour la question sur les évacuations massives (dataframe **d**). On le merge avec le dataframe **cc**, liste des communes du secteur Obernai. Les caractères de *cc* doivent être mis en majuscule pour être compatibles avec la colonne 9 (Libelle.routage) de *d*.  
+Le datadrame résultant (**a**) comporte un grand nombre de colonnes. On extrait le dataframe **mr** qui ne comporte qu'un nombre limité de colonnes. Les 6 dernières colonnes de *mr* sont sommées pour obtenir le nombre total de places d'hébergement. Finalement on obtient le dataframe **mrr**.
+ 
 ```{r ehpad, results='asis',echo=FALSE}
 
 load("~/Documents/Resural/Stat Resural/EHPAD/data/ehpad_alsace.Rda")

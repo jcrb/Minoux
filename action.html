@@ -470,6 +470,9 @@ On récupère la liste des communes du secteur Obernai (avec une modification po
 
 <h2>EHPAD du secteur (24/3/2014)</h2>
 
+<p>On utilise le fichiers des EHPAD créé pour la question sur les évacuations massives (dataframe <strong>d</strong>). On le merge avec le dataframe <strong>cc</strong>, liste des communes du secteur Obernai. Les caractères de <em>cc</em> doivent être mis en majuscule pour être compatibles avec la colonne 9 (Libelle.routage) de <em>d</em>.<br/>
+Le datadrame résultant (<strong>a</strong>) comporte un grand nombre de colonnes. On extrait le dataframe <strong>mr</strong> qui ne comporte qu&#39;un nombre limité de colonnes. Les 6 dernières colonnes de <em>mr</em> sont sommées pour obtenir le nombre total de places d&#39;hébergement. Finalement on obtient le dataframe <strong>mrr</strong>.</p>
+
 <table><thead>
 <tr>
 <th align="left">id</th>
